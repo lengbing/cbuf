@@ -10,7 +10,9 @@ luarocks install cbuf
 
 # Reference
 
-`new(size)`
+```Lua
+new(size)
+```
 
 Receives a size, returns a c buffer.
 
@@ -22,7 +24,9 @@ Receives a size, returns a c buffer.
 
 - a lightuserdata refers to the c buffer, or nil if failed.
 
-`delete(buffer)`
+```Lua
+delete(buffer)
+```
 
 Receives a buffer and delete it.
 
@@ -34,7 +38,9 @@ Receives a buffer and delete it.
 
 - none
 
-`size(buffer)`
+```Lua
+size(buffer)
+```
 
 Returns the size of the buffer.
 
@@ -46,7 +52,9 @@ Returns the size of the buffer.
 
 - the size of the buffer
 
-`slice(buffer, index)`
+```Lua
+slice(buffer, index)
+```
 
 Returns a slice of the buffer.
 
@@ -63,7 +71,9 @@ Returns a slice of the buffer.
 
 - Be careful with the slice. A slice is just a c pointer without range checking.
 
-`shift(buffer, index, length, offset)`
+```Lua
+shift(buffer, index, length, offset)
+```
 
 Shift the segment inside the buffer.
 
@@ -78,7 +88,9 @@ Shift the segment inside the buffer.
 
 - none
 
-`zero(buffer, index, length)`
+```Lua
+zero(buffer, index, length)
+```
 
 Fill zeros into the buffer.
 
@@ -92,7 +104,9 @@ Fill zeros into the buffer.
 
 - none
 
-`copy(destbuf, destidx, srcbuf, srcidx, length)`
+```Lua
+copy(destbuf, destidx, srcbuf, srcidx, length)
+```
 
 Copy the segment from srcbuf to destbuf.
 
@@ -108,7 +122,9 @@ Copy the segment from srcbuf to destbuf.
 
 - none
 
-`copystring(destbuf, destidx, srcstr, srcidx, length)`
+```Lua
+copystring(destbuf, destidx, srcstr, srcidx, length)
+```
 
 Copy the segment from srcstr to destbuf.
 
@@ -124,7 +140,9 @@ Copy the segment from srcstr to destbuf.
 
 - none
 
-`tostring(buffer, index)`
+```Lua
+tostring(buffer, index)
+```
 
 Returns a null-terminated string from the buffer.
 
@@ -137,7 +155,9 @@ Returns a null-terminated string from the buffer.
 
 - a string from the buffer, start from index, terminate while reaching '\0'
 
-`tolstring(buffer, index, length)`
+```Lua
+tolstring(buffer, index, length)
+```
 
 Returns a fixed length string from the buffer.
 
