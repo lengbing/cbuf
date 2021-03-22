@@ -107,7 +107,6 @@ static int cbuf_zero(lua_State* L)
 {
     to_cbuf(cb, 1);
     size_t index = 0;
-    size_t length = cb->size;
     int top = lua_gettop(L);
     if (top >= 2) {
         luaL_argexpected(L, lua_isinteger(L, 2), 2, "integer");
@@ -117,6 +116,7 @@ static int cbuf_zero(lua_State* L)
             return 0;
         }
     }
+    size_t length = cb->size - index;
     if (top >= 3) {
         luaL_argexpected(L, lua_isinteger(L, 3), 3, "integer");
         length = lua_tointeger(L, 3);
