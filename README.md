@@ -10,7 +10,7 @@ luarocks install cbuf
 
 # Reference
 
-## New
+## new
 
 ```Lua
 new(size)
