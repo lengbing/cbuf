@@ -10,6 +10,8 @@ luarocks install cbuf
 
 # Reference
 
+## New
+
 ```Lua
 new(size)
 ```
@@ -23,6 +25,8 @@ Receives a size, returns a c buffer.
 ##### Returns
 
 - a lightuserdata refers to the c buffer, or nil if failed.
+
+## delete
 
 ```Lua
 delete(buffer)
@@ -38,6 +42,8 @@ Receives a buffer and delete it.
 
 - none
 
+## size
+
 ```Lua
 size(buffer)
 ```
@@ -51,6 +57,8 @@ Returns the size of the buffer.
 ##### Returns
 
 - the size of the buffer
+
+## slice
 
 ```Lua
 slice(buffer, index)
@@ -71,6 +79,8 @@ Returns a slice of the buffer.
 
 - Be careful with the slice. A slice is just a c pointer without range checking.
 
+## shift
+
 ```Lua
 shift(buffer, index, length, offset)
 ```
@@ -88,6 +98,8 @@ Shift the segment inside the buffer.
 
 - none
 
+## zero
+
 ```Lua
 zero(buffer, index, length)
 ```
@@ -103,6 +115,8 @@ Fill zeros into the buffer.
 ##### Returns
 
 - none
+
+## copy
 
 ```Lua
 copy(destbuf, destidx, srcbuf, srcidx, length)
@@ -122,6 +136,8 @@ Copy the segment from srcbuf to destbuf.
 
 - none
 
+## copystring
+
 ```Lua
 copystring(destbuf, destidx, srcstr, srcidx, length)
 ```
@@ -140,6 +156,8 @@ Copy the segment from srcstr to destbuf.
 
 - none
 
+## tostring
+
 ```Lua
 tostring(buffer, index)
 ```
@@ -154,6 +172,8 @@ Returns a null-terminated string from the buffer.
 ##### Returns
 
 - a string from the buffer, start from index, terminate while reaching '\0'
+
+## tolstring
 
 ```Lua
 tolstring(buffer, index, length)
