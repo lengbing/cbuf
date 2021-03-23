@@ -6,9 +6,9 @@
 #include <lauxlib.h>
 
 #ifdef _MSC_VER
-#define LOS_EXPORT __declspec(dllexport)
+#define LUA_MOD_EXPORT __declspec(dllexport)
 #else
-#define LOS_EXPORT extern
+#define LUA_MOD_EXPORT extern
 #endif
 
 
@@ -220,7 +220,7 @@ static int cbuf_tolstring(lua_State* L)
 }
 
 
-LOS_EXPORT int luaopen_cbuf(lua_State* L)
+LUA_MOD_EXPORT int luaopen_cbuf(lua_State* L)
 {
     luaL_Reg lib[] = {
         {"new", cbuf_new},
