@@ -13,14 +13,15 @@ luarocks install cbuf
 ## new
 
 ```Lua
-new(size)
+new(size, uvcount)
 ```
 
-Receives a size, returns a c buffer.
+Creates a c buffer.
 
 ##### Parameters
 
 - size - size of the allocating buffer
+- uvcount - count of user values associated with the buffer, default is 0
 
 ##### Returns
 
@@ -32,7 +33,7 @@ Receives a size, returns a c buffer.
 delete(buffer)
 ```
 
-Receives a buffer and delete it.
+Delete the buffer.
 
 ##### Parameters
 
@@ -48,7 +49,7 @@ Receives a buffer and delete it.
 size(buffer)
 ```
 
-Returns the size of the buffer.
+Gets the size of the buffer.
 
 ##### Parameters
 
@@ -58,22 +59,73 @@ Returns the size of the buffer.
 
 - the size of the buffer
 
-## slice
+## uvcount
 
 ```Lua
-slice(buffer, index)
+uvcount(buffer)
 ```
 
-Returns a slice of the buffer.
+Gets the user value count associated with the buffer
 
 ##### Parameters
 
 - buffer - cbuf object
-- index - index to start with
 
 ##### Returns
 
-- the slice of the buffer in range [index, buffersize)
+- the user value count associated with the buffer
+
+## getuv
+
+```Lua
+getuv(buffer, index)
+```
+
+Gets the buffer's user value at index
+
+##### Parameters
+
+- buffer - cbuf object
+- index - index of user value
+
+##### Returns
+
+- the user value at index
+
+## setuv
+
+```Lua
+setuv(buffer, index, value)
+```
+
+Sets the buffer's user value at index to value
+
+##### Parameters
+
+- buffer - cbuf object
+- index - index of user value
+- value - value to set
+
+##### Returns
+
+- none
+
+## slice
+
+```Lua
+slice(buffer, offset)
+```
+
+Gets a slice of the buffer.
+
+##### Parameters
+
+- buffer - cbuf object
+- offset - offset to start with
+
+##### Returns
+
+- the slice of the buffer in range [offset, buffersize)
 
 ##### Notes
 
@@ -82,7 +134,7 @@ Returns a slice of the buffer.
 ## shift
 
 ```Lua
-shift(buffer, index, length, offset)
+shift(buffer, offset, length, move)
 ```
 
 Shift the segment inside the buffer.
@@ -90,9 +142,9 @@ Shift the segment inside the buffer.
 ##### Parameters
 
 - buffer - cbuf object
-- index - index to start with
+- offset - offset to start with
 - length - length of the segment to shift with
-- offset - offset to shift, negative for left shift and positive for right shift
+- move - move to shift, negative for left shift and positive for right shift
 
 ##### Returns
 
@@ -101,7 +153,7 @@ Shift the segment inside the buffer.
 ## zero
 
 ```Lua
-zero(buffer, index, length)
+zero(buffer, offset, length)
 ```
 
 Fill zeros into the buffer.
@@ -109,8 +161,8 @@ Fill zeros into the buffer.
 ##### Parameters
 
 - buffer - cbuf object
-- index - index to start with, default is 0
-- length - length of the segment to fill into, default is buffersize - index
+- offset - offset to start with, default is 0
+- length - length of the segment to fill into, default is buffersize - offset
 
 ##### Returns
 
@@ -119,7 +171,7 @@ Fill zeros into the buffer.
 ## copy
 
 ```Lua
-copy(destbuf, destidx, srcbuf, srcidx, length)
+copy(destbuf, destoffset, srcbuf, srcoffset, length)
 ```
 
 Copy the segment from srcbuf to destbuf.
@@ -127,9 +179,9 @@ Copy the segment from srcbuf to destbuf.
 ##### Parameters
 
 - destbuf - cbuf object that writing into
-- destidx - index to start writing info
+- destoffset - index to start writing info
 - srcbuf - cbbuf object that reading from
-- srcidx - index to start reading from
+- srcoffset - index to start reading from
 - length - length of the segment to copy with
 
 ##### Returns
@@ -139,7 +191,7 @@ Copy the segment from srcbuf to destbuf.
 ## copystring
 
 ```Lua
-copystring(destbuf, destidx, srcstr, srcidx, length)
+copystring(destbuf, destoffset, srcstr, srcidx, length)
 ```
 
 Copy the segment from srcstr to destbuf.
@@ -149,7 +201,7 @@ Copy the segment from srcstr to destbuf.
 - destbuf - cbuf object that writing into
 - destidx - index to start writing info
 - srcstr - string that reading from
-- srcidx - index to start reading from
+- srcidx - index to start reading from, string index start from 1
 - length - length of the segment to copy with
 
 ##### Returns
@@ -159,32 +211,32 @@ Copy the segment from srcstr to destbuf.
 ## tostring
 
 ```Lua
-tostring(buffer, index)
+tostring(buffer, offset)
 ```
 
-Returns a null-terminated string from the buffer.
+Gets a null-terminated string from the buffer.
 
 ##### Parameters
 
 - buffer - cbuf object
-- index - index to start with, default is 0
+- offset - offset to start with, default is 0
 
 ##### Returns
 
-- a string from the buffer, start from index, terminate while reaching '\0'
+- a string from the buffer, start from offset, terminate while reaching '\0'
 
 ## tolstring
 
 ```Lua
-tolstring(buffer, index, length)
+tolstring(buffer, offset, length)
 ```
 
-Returns a fixed length string from the buffer.
+Gets a fixed length string from the buffer.
 
 - buffer - cbuf object
-- index - index to start with
+- offset - index to start with
 - length - length of the string
 
 ##### Returns
 
-- a string from the buffer, in range [index, index + length)
+- a string from the buffer, in range [offset, offset + length)

@@ -1,8 +1,8 @@
 package = "cbuf"
-version = "0.0.1-2"
+version = "0.0.2-1"
 source = {
    url = "git+https://github.com/lengbing/cbuf.git",
-   tag = "0.0.2"
+   tag = "0.0.3"
 }
 description = {
    summary = "Simple C Buffer for Lua",
