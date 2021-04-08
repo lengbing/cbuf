@@ -104,7 +104,7 @@ Sets the buffer's user value at index to value
 
 - buffer - cbuf object
 - index - index of user value
-- value - value to set
+- value - value to set, only integer could be set
 
 ##### Returns
 
